@@ -37,8 +37,8 @@ class room extends  Thread
 class waiter extends  Thread
 {
     public  waiter(){
-        this.setDaemon(true);//设置线程为守护线程当r1结束后 w就不在继续报时
-    }
+        this.setDaemon(true);
+    }//设置线程为守护线程当r1结束后 w就不在继续报时
     public void run()
     {
         while (true)

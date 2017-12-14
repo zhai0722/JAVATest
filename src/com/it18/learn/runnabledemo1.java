@@ -9,8 +9,8 @@ public class runnabledemo1
     public static void main(String[] args) {
         myrunnable r=new myrunnable("张");
         myrunnable r1=new myrunnable("李");
-        r.run();
-        r1.run();
+        new Thread(r).start();
+        new Thread(r1).start();
     }
 }
 
@@ -22,7 +22,9 @@ class myrunnable implements Runnable{
  }
 
     public  void run(){
-        this.name=name;
-        System.out.println(name+"hello");
+
+        while (true){
+            this.name=name;
+        System.out.println(name+"hello");}
     }
 }

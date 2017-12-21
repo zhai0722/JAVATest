@@ -1,0 +1,3 @@
+hashset 与hashmap没有本质区别  hashset就是hashmap实现
+hash的目的是把数据打散 实现数据均匀分布
+是链表和数组的组合

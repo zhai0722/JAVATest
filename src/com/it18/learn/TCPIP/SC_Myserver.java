@@ -11,23 +11,15 @@ import java.net.Socket;
 /**
  * Created by Think on 2017/12/22.
  */
-public class Myserver {
+public class SC_Myserver {
     @Test
     public  void start() throws IOException {
         ServerSocket ss=new ServerSocket(8888);
         while (true)
         {
-            Socket s=ss.accept();
-            System.out.println("有链接了");
-            InputStream is=s.getInputStream();
-            InputStreamReader reader= new InputStreamReader(is);
-            char[] buf=new char[1024];
-            int len=0;
-            while ((len=reader.read(buf))!=-1)
-            {
-                System.out.println(new String(buf,0,len));
+           Socket s=ss.accept();//接受客户端请求
+           new SC_CommunicationThread(s).start();
 
-            }
 
 
         }

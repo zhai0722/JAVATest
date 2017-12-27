@@ -16,8 +16,8 @@ public class nettyServerHandler1 extends ChannelHandlerAdapter{
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf=(ByteBuf)msg;
         byte[] data=new byte[buf.readableBytes()];
-        buf.readByte();
-        String request=new String(data,"UTF-8");
+        buf.readBytes(data);
+        String request=new String(data,"utf-8");
         System.out.println("server"+request);
         //写给客户
         String response="feedbak message";

@@ -24,7 +24,7 @@ public class nettyclient1 {
                 socketChannel.pipeline().addLast(new nettyclientHandler());
             }
         });
-        ChannelFuture future=bootstrap.connect("127.0.0.1",8888).sync();
+        ChannelFuture future=bootstrap.connect("127.0.0.1",8379).sync();
         future.channel().writeAndFlush(Unpooled.copiedBuffer("777".getBytes()));
         future.channel().closeFuture().sync();
         workgroup.shutdownGracefully();

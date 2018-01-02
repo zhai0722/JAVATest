@@ -82,11 +82,20 @@ public class testjdbc1 {
         conn=getconn();
         try {
             st=conn.createStatement();
-            st.execute("delete from user");
+            st.execute("delete from user where id>12");
             st.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                st.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
         }
 
 
@@ -100,7 +109,7 @@ public class testjdbc1 {
         try {
             conn.setAutoCommit(false);//自动提交
             st=conn.createStatement();
-            st.execute("insert into user(id,username) values(10, 'tom10')");
+            st.execute("insert into user(id,username,age) values(10, 'tom10','23')");
             Savepoint s1=conn.setSavepoint("1");//自动保存点
             st.execute("insert into user(id,username) values(11, 'tom11')");
             Savepoint s2=conn.setSavepoint("2");
@@ -119,13 +128,150 @@ public class testjdbc1 {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                st.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
 
     }
+    public static void testselect() {
+        Statement st=null;
+        ResultSet rs=null;
+        Connection conn = getconn();
+        try {
+            String sname="tom10";
+            int sage=23;
+            conn.setAutoCommit(false);
+             st = conn.createStatement();
+             rs = st.executeQuery("select * from user where username='"+sname+"' and age='"+sage+"'");
+            while (rs.next()) {
+                int id = rs.getInt(1);//jdbc是从1开始
+                String name = rs.getString("username");
+                Integer age= (Integer)rs.getObject("age");//可以显示null
+                System.out.println(id + ":" + "name:"+name+"age:"+age);
+
+            }
+            conn.commit();
+            st.close();
+            conn.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                st.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public static void testprepare() {
+
+        Connection conn=null;
+        PreparedStatement ppst=null;//prepare批量速度快 预处理语句 链接后不用解析
+       conn = getconn();
+        try {
+
+            conn.setAutoCommit(false);
+            ppst = conn.prepareStatement("insert into user(id,username,age) values(?,?,?)");//问号占位符
+            ppst.setInt(1,12);
+            ppst.setString(2,"J1");
+            ppst.setInt(3,25);
+            ppst.executeUpdate();
+            conn.commit();
+            ppst.close();
+            conn.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                ppst.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+//测试批量
+    public static void testbatchsave() {
+
+        Connection conn=null;
+        PreparedStatement ppst=null;//prepare批量速度快 预处理语句 链接后不用解析
+        conn = getconn();
+        int max=100005;
+        try {
+
+            conn.setAutoCommit(false);
+            long start=System.currentTimeMillis();
+            ppst = conn.prepareStatement("insert into user(id,username,age) values(?,?,?)");//问号占位符
+
+            for(int i=0;i< max ;i++){
+
+
+
+                ppst.setInt(1, i);
+                ppst.setString(2, "J"+i);
+                ppst.setInt(3, i%100);
+
+                ppst.addBatch();//增加批次
+                //分段提交
+                if((i%5000==0&&i!=0)||i==(max-1)) {
+                    ppst.executeBatch();//提交批次
+                   // ppst.executeUpdate();
+                    conn.commit();
+                    conn.setAutoCommit(false);
+                    //ppst = conn.prepareStatement("insert into user(id,username,age) values(?,?,?)");//问号占位符
+                    System.out.println("------------->5000");
+
+                }
+
+            }
+
+            System.out.println(System.currentTimeMillis()-start);
+            conn.commit();
+            ppst.close();
+            conn.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                ppst.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
     public static void main(String[] args) {
         loaddriver();
         delete();
         insertdata();
         savepoint();
+        testselect();
+        testprepare();
+        testbatchsave();
 
     }
 

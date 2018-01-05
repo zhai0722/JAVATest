@@ -18,6 +18,13 @@
      <property name="acquireIncrement" value="2"/>
 
  </bean>
+    <!-- 该 BeanPostProcessor 将自动对标注 @Autowired 的 Bean 进行注入 -->
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
     <context:component-scan base-package="springdemo.dao,springdemo.service"/>
+
+
+<bean id="sf" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="datasource" ref="datasource"/>
+</bean>
 </beans>
 

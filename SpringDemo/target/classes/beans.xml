@@ -18,5 +18,6 @@
      -->
 
     <context:component-scan base-package="springdemo.dao,springdemo.service"/>
+
 </beans>
 

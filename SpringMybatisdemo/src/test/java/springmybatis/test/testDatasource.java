@@ -15,7 +15,7 @@ public class testDatasource {
     @Test
     public void testconnect(){
         ApplicationContext ac =new ClassPathXmlApplicationContext("beans.xml");
-        DataSource ds=(DataSource)ac.getBean("datasource");
+        DataSource ds=(DataSource)ac.getBean("dataSource");
         try {
             System.out.println(ds.getConnection());
         } catch (SQLException e) {

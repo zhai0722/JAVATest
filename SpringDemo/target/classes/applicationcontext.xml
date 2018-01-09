@@ -8,7 +8,7 @@
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
 <!--  SCOPE取值singlton prototype-->
-    <bean id="user" class="springitcasebean.user" scope="prototype">
+    <bean id="bean.jdbctemplate.user" class="springitcasebean.user" scope="prototype">
     <property name="name" value="zhang"/>
     </bean>
      <bean id="vipuser" class="springitcasebean.vipuser">  </bean>

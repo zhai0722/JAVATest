@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/SpringDemo/pom.xml" />
         <option value="$PROJECT_DIR$/SpringMybatisdemo/pom.xml" />
+        <option value="$PROJECT_DIR$/springcache/pom.xml" />
       </list>
     </option>
   </component>

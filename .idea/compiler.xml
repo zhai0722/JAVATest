@@ -6,12 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="java" />
+        <module name="springcache" />
         <module name="SpringDemo" />
         <module name="SpringMybatisdemo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SpringDemo" target="1.5" />
+      <module name="java" target="1.5" />
+      <module name="springcache" target="1.5" />
+      <module name="SpringDemo" target="1.6" />
       <module name="SpringMybatisdemo" target="1.5" />
     </bytecodeTargetLevel>
   </component>

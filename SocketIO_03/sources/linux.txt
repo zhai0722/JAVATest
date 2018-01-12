@@ -254,7 +254,7 @@ apt-get upgrade ���������Ѱ�װ�����
 apt-get remove package_name ��ϵͳɾ��һ��deb��
 apt-get check ȷ������������ֿ���ȷ
 apt-get clean �����ص��������������
-apt-cache search searched-package ���ذ�����Ҫ�����ַ��������������
+apt-bean.cache search searched-package ���ذ�����Ҫ�����ַ��������������
 
 ���ض������� ^
 

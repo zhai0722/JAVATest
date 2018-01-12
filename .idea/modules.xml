@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/JAVATest.iml" filepath="$PROJECT_DIR$/JAVATest.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringDemo/SpringDemo.iml" filepath="$PROJECT_DIR$/SpringDemo/SpringDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringMybatisdemo/SpringMybatisdemo.iml" filepath="$PROJECT_DIR$/SpringMybatisdemo/SpringMybatisdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcache/springcache.iml" filepath="$PROJECT_DIR$/springcache/springcache.iml" />
     </modules>
   </component>
 </project>

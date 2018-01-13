@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+      xmlns:bean.cache="http://www.springframework.org/schema/bean.cache"
+ xsi:schemaLocation="
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+  http://www.springframework.org/schema/bean.cache http://www.springframework.org/schema/bean.cache/spring-bean.cache-3.1.xsd">
+
+
+        <!-- 使用时间统计功能 -->
+    <bean.cache:annotation-driven />
+    <bean id="cacheManager" class="org.springframework.bean.cache.support.SimpleCacheManager">
+    <property name="caches">
+    <set> <bean class="org.springframework.bean.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default" />
+    <bean class="org.springframework.bean.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="data" />
+    </set>
+    </property>
+    </bean>
+    <bean id="userDao" class="com.baidu.adgameoperate.bean.cache.UserDaoImpl" ></bean>
+
+  <!-- 创建User Service bean -->
+ <bean id="userService" class="com.baidu.adgameoperate.bean.cache.userserviceImpl" >
+     <property name="userDao" >
+       <ref bean="userDao"></ref>
+     </property>
+  </bean>
+
+
+
+</beans>
